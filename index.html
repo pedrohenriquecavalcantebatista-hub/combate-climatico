@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Combate à Crise Climática — Projeto (TCC Nível Médio)</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  :root{
+    --verde:#0f9d58; --verde-esc:#0b7a42; --azul:#1463d6; --bg:#f6fbf7; --card:#ffffff; --muted:#40515a; --accent:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;background:var(--bg);color:#0b2b2a;line-height:1.65}
+  nav{position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter: blur(4px);display:flex;gap:8px;justify-content:center;padding:10px;z-index:60;border-bottom:1px solid #e8f3ea}
+  nav a{color:var(--verde-esc);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:700}
+  nav a:hover{background:#f0fff4}
+  header{background:linear-gradient(135deg,var(--verde),#33c26c);color:white;padding:56px 18px 28px;text-align:center}
+  header h1{margin:6px 0;font-size:1.5rem}
+  header p{max-width:980px;margin:8px auto 0;font-size:1.0rem;opacity:0.98}
+  .container{max-width:1100px;margin:22px auto;padding:0 18px}
+  .card{background:var(--card);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 10px 30px rgba(8,12,10,0.04)}
+  h2{color:var(--verde-esc);margin:0 0 12px 0;font-size:1.18rem}
+  h3{margin:10px 0 8px 0}
+  .lead{color:var(--muted)}
+  .authors{font-size:0.95rem;margin-top:6px;color:#08323a}
+  .meta{color:#025; font-weight:700; font-size:0.95rem}
+  .flex{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .galeria img{width:100%;height:160px;object-fit:cover;border-radius:8px;display:block}
+  .figure{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+  .figure img{width:100%;max-width:420px;border-radius:8px;object-fit:cover}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  th,td{padding:8px;border-bottom:1px solid #eef7ee;text-align:left}
+  .muted{color:var(--muted)}
+  .small{font-size:0.9rem;color:var(--muted)}
+  .center{text-align:center}
+  footer{background:var(--verde-esc);color:white;padding:16px;text-align:center;margin-top:18px}
+  /* Toolbar ADM */
+  .toolbar{position:fixed;right:18px;top:110px;background:rgba(255,255,255,0.98);border-radius:10px;padding:12px;box-shadow:0 12px 36px rgba(2,6,23,0.12);z-index:220;min-width:260px;display:none}
+  .toolbar h4{margin:0 0 8px 0;font-size:1rem;color:#111}
+  .toolbar button{display:inline-block;background:var(--verde);color:white;border:0;padding:8px 10px;border-radius:8px;margin:6px 4px;cursor:pointer}
+  .toolbar .btn-muted{background:#ddd;color:#333}
+  #adm-toggle{position:fixed;right:18px;bottom:18px;background:var(--accent);color:white;border:0;padding:12px 14px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 14px 40px rgba(2,6,23,0.18);z-index:240}
+  .editable[contenteditable="true"]{outline:2px dashed var(--accent);background:#fffaf0}
+  .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#f0fff4;color:var(--verde-esc);font-weight:700;margin-right:8px}
+  canvas{width:100%!important;height:auto!important;border-radius:8px}
+  .toc{columns:2;column-gap:20px}
+  @media(max-width:980px){.toolbar{position:static;margin:12px auto;display:none}.toc{columns:1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#capa">Capa</a>
+  <a href="#resumo">Resumo</a>
+  <a href="#sumario">Sumário</a>
+  <a href="#introducao">Introdução</a>
+  <a href="#objetivos">Objetivos</a>
+  <a href="#fundamentacao">Fundamentação</a>
+  <a href="#metodologia">Metodologia</a>
+  <a href="#resultados">Resultados</a>
+  <a href="#discussao">Discussão</a>
+  <a href="#conclusao">Conclusão</a>
+  <a href="#referencias">Referências</a>
+  <a href="#apendice">Apêndice</a>
+</nav>
+
+<header id="capa" class="card">
+  <div style="max-width:980px;margin:0 auto">
+    <div class="center">
+      <h1 class="editable center" data-edit-id="title">Combate à Crise Climática: Ações para Enfrentar a Mudança Global do Clima</h1>
+      <p class="authors editable center" data-edit-id="authors">Caio Emanuel, Felipe Rios, João Ricardo, Leonardo Jardim, Pedro Antônio e Pedro Henrique</p>
+      <p class="meta editable center" data-edit-id="projectmeta">Projeto de pesquisa acadêmica — Colégio Alfa Cem Bilíngue — Espaço Científico</p>
+      <p class="small center">RIO DE JANEIRO — 2025</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Resumo -->
+  <section id="resumo" class="card">
+    <h2>Resumo</h2>
+    <p class="editable lead" data-edit-id="resumo-pt">
+      O presente trabalho analisou os impactos das mudanças climáticas em ecossistemas locais com enfoque no Brasil e avaliou o uso de jogos digitais como ferramenta educativa. A pesquisa combinou revisão bibliográfica, desenvolvimento de cenário no Minecraft Education Edition e aplicação de questionário com 32 alunos do 7º ano. Os resultados indicam aumento da compreensão e engajamento, além de sugestões para ampliar fases e conteúdos do jogo. O estudo destaca a importância da educação ativa para formar cidadãos comprometidos com práticas sustentáveis.
+    </p>
+
+    <h3>Abstract</h3>
+    <p class="editable lead" data-edit-id="resumo-en">
+      This research analyzed climate change impacts on local Brazilian ecosystems and evaluated digital games as teaching tools. Methods included literature review, a Minecraft Education Edition scenario and questionnaires with 32 seventh-grade students. Results showed improved understanding and engagement, highlighting digital games as effective pedagogical tools for environmental education.
+    </p>
+
+    <p class="small"><strong>Palavras-chave:</strong> Mudanças Climáticas; Educação Ambiental; Minecraft Education Edition; Desmatamento; Sustentabilidade.</p>
+  </section>
+
+  <!-- Sumário -->
+  <section id="sumario" class="card">
+    <h2>Sumário</h2>
+    <div class="toc">
+      <ol>
+        <li><a href="#introducao">Introdução</a></li>
+        <li><a href="#objetivos">Objetivos</a></li>
+        <li><a href="#fundamentacao">Fundamentação Teórica</a></li>
+        <li><a href="#metodologia">Metodologia</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#discussao">Discussão</a></li>
+        <li><a href="#conclusao">Conclusão</a></li>
+        <li><a href="#referencias">Referências</a></li>
+        <li><a href="#apendice">Apêndice</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- INTRODUÇÃO -->
+  <section id="introducao" class="card">
+    <h2>Introdução</h2>
+    <p class="editable lead" data-edit-id="intro">
+      A Agenda 2030 e os Objetivos de Desenvolvimento Sustentável (ODS) colocam a ação climática como prioridade global. O ODS 13 orienta a integração de políticas climáticas em diferentes setores. Este projeto explora como jogos digitais podem ser aplicados em contextos escolares para comunicar riscos climáticos e práticas sustentáveis a partir de um estudo de caso no Colégio Alfa Cem Bilíngue.
+    </p>
+
+    <div class="figure" style="margin-top:12px">
+      <img data-img-id="intro-fig" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Greenhouse_Effect.svg" alt="Efeito Estufa">
+      <div>
+        <p class="small">Figura 1 — Esquema do efeito estufa, ilustrando gases que retêm radiação térmica na atmosfera.</p>
+        <p class="small">Fonte: Wikimedia Commons (ilustração).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJETIVOS -->
+  <section id="objetivos" class="card">
+    <h2>Objetivos</h2>
+    <h3>Objetivo Geral</h3>
+    <p class="editable" data-edit-id="obj-geral">Desenvolver um jogo educativo no Minecraft Education Edition que simule impactos de secas, desmatamento e queimadas, promovendo a compreensão e práticas sustentáveis entre alunos do 7º ano.</p>
+    <h3>Objetivos Específicos</h3>
+    <ul>
+      <li class="editable" data-edit-id="obj1">Analisar emissões de GEE por queimadas na Amazônia.</li>
+      <li class="editable" data-edit-id="obj2">Avaliar engajamento e aprendizagem dos alunos.</li>
+      <li class="editable" data-edit-id="obj3">Produzir material pedagógico complementar.</li>
+    </ul>
+  </section>
+
+  <!-- FUNDAMENTAÇÃO -->
+  <section id="fundamentacao" class="card">
+    <h2>Fundamentação Teórica</h2>
+
+    <h3>3.1 Mudanças climáticas e ecossistemas</h3>
+    <p class="editable small" data-edit-id="ft1">
+      O aumento das concentrações de dióxido de carbono (CO₂), metano (CH₄) e óxidos de nitrogênio está correlacionado com a elevação da temperatura média global. Alterações nos padrões de precipitação, aumento de eventos extremos e mudanças na fenologia de espécies são consequências observadas e documentadas em relatórios do IPCC, NASA e WMO.
+    </p>
+
+    <h3>3.2 Perda de biodiversidade e serviços ecossistêmicos</h3>
+    <p class="editable small" data-edit-id="ft2">
+      A perda de habitat, aliada às pressões antrópicas, reduz a provisão de serviços ecossistêmicos como polinização, regulação hídrica e sequestro de carbono, afetando meios de subsistência locais.
+    </p>
+
+    <h3>3.3 Emissões por Queimadas</h3>
+    <p class="editable small" data-edit-id="ft3">
+      Queimadas e desmatamento são fontes significativas de emissão de CO₂ e aerossóis. Estimativas variam conforme tipo de biomassa queimada, intensidade do fogo e práticas de manejo. Tais emissões contribuem para picos sazonais de poluição e para a contribuição líquida de carbono na atmosfera.
+    </p>
+
+    <div class="galeria" style="margin-top:12px">
+      <img data-img-id="ft-img1" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Amazon_rainforest.jpg" alt="Floresta Amazônica">
+      <img data-img-id="ft-img2" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/5/54/Iceberg_in_Greenland.jpg" alt="Degelo Polar">
+      <img data-img-id="ft-img3" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Wind_turbines_and_sunset.jpg" alt="Energia Eólica">
+    </div>
+  </section>
+
+  <!-- METODOLOGIA -->
+  <section id="metodologia" class="card">
+    <h2>Metodologia</h2>
+    <p class="editable small" data-edit-id="metodo">
+      O estudo utilizou abordagem mista: (i) revisão bibliográfica sobre mudanças climáticas e metodologias pedagógicas; (ii) desenvolvimento de cenário no Minecraft Education Edition com elementos interativos (fogo controlado, seca progressiva, restauração de vegetação); (iii) aplicação de questionário pré e pós-atividade com 32 alunos do 7º ano; (iv) análise qualitativa de debates e relatórios de campo.
+    </p>
+
+    <h3>Desenho do jogo</h3>
+    <p class="small">O mundo virtual foi dividido em biomas representativos, com scripts que simulavam perda de cobertura vegetal, redução do nível de água e efeitos de queimadas. Os alunos foram instruídos a executar atividades de restauração e medidas sustentáveis como plantio de árvores e gestão de recursos.</p>
+
+    <h3>Coleta e Análise</h3>
+    <p class="small">Os questionários foram tabulados e apresentados em tabelas e gráficos. As respostas abertas foram categorizadas por temas recorrentes (compreensão, motivação, sugestões).</p>
+  </section>
+
+  <!-- RESULTADOS -->
+  <section id="resultados" class="card">
+    <h2>Resultados e Discussão</h2>
+    <p class="editable small" data-edit-id="res-discuss">
+      A maioria dos alunos (32) compreendeu o objetivo do jogo; 30 se sentiram mais conscientes; 32 relataram gostar da atividade. As respostas abertas indicaram reflexão sobre ações individuais e coletivas.
+    </p>
+
+    <h3>Tabela resumo do questionário</h3>
+    <table>
+      <thead><tr><th>Pergunta</th><th>Positivas</th><th>Negativas</th><th>Observações</th></tr></thead>
+      <tbody>
+        <tr><td>1 - Entendeu o objetivo?</td><td>32</td><td>0</td><td>Compreensão geral</td></tr>
+        <tr><td>2 - Conscientização</td><td>30</td><td>2</td><td>Aprofundar fases</td></tr>
+        <tr><td>3 - Gostou do jogo?</td><td>32</td><td>0</td><td>Alto engajamento</td></tr>
+        <tr><td>4 - Pode ajudar outras pessoas?</td><td>32</td><td>0</td><td>Recomendado</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Gráficos interativos</h3>
+    <div style="display:grid;grid-template-columns:1fr;gap:12px">
+      <div class="card">
+        <h4>Resultados do Questionário (positivas vs negativas)</h4>
+        <canvas id="chartSurvey" height="200"></canvas>
+      </div>
+
+      <div class="card">
+        <h4>Anomalia de Temperatura (1880–2024, série resumida)</h4>
+        <canvas id="chartTemp" height="220"></canvas>
+        <p class="small">Fonte: dados consolidados (Our World in Data / NASA) — exibidos como série resumida para apresentação.</p>
+      </div>
+
+      <div class="card">
+        <h4>CO₂ atmosférico (ppm) — Indicador</h4>
+        <canvas id="chartCO2" height="220"></canvas>
+      </div>
+    </div>
+
+    <h3>Imagens do desenvolvimento (exemplos)</h3>
+    <div class="galeria">
+      <img data-img-id="dev1" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Solar_panels_and_sky.jpg" alt="Painéis solares">
+      <img data-img-id="dev2" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Hydroelectric_dam_in_Brazil.jpg" alt="Usina Hidrelétrica">
+      <img data-img-id="dev3" class="replacable" src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Community_gardening_in_UK.jpg" alt="Horta Comunitária">
+    </div>
+  </section>
+
+  <!-- Discussão -->
+  <section id="discussao" class="card">
+    <h2>Discussão</h2>
+    <p class="editable small" data-edit-id="discuss">
+      Os achados corroboram literatura que indica jogos como ferramentas eficazes para aprendizagem. Limitações incluem tamanho da amostra e ausência de acompanhamento longitudinal. Recomenda-se replicação com turmas diversas e inclusão de medidas de retenção.
+    </p>
+
+    <h3>Implicações pedagógicas</h3>
+    <p class="small">Integração com currículo, formação de professores e avaliação de competências socioemocionais podem aumentar impacto do recurso.</p>
+  </section>
+
+  <!-- Conclusão -->
+  <section id="conclusao" class="card">
+    <h2>Conclusão</h2>
+    <p class="editable small" data-edit-id="concl">
+      O uso de Minecraft Education Edition mostrou-se promissor para educação ambiental. O projeto contribuiu para engajamento e compreensão dos estudantes sobre temas complexos, indicando caminhos para ampliar uso pedagógico em disciplinas relacionadas ao meio ambiente e cidadania.
+    </p>
+    <h3>Recomendações</h3>
+    <ul>
+      <li class="editable" data-edit-id="rec1">Expandir amostra e repetir o estudo em outras escolas.</li>
+      <li class="editable" data-edit-id="rec2">Incluir avaliações longitudinais.</li>
+      <li class="editable" data-edit-id="rec3">Integrar projetos com políticas locais de reflorestamento.</li>
+    </ul>
+  </section>
+
+  <!-- Referências -->
+  <section id="referencias" class="card">
+    <h2>Referências bibliográficas (ABNT - seleção)</h2>
+    <div class="small editable" data-edit-id="refs">
+      <p>ALMEIDA, João et al. Impactos das mudanças climáticas nos biomas brasileiros: Mata Atlântica e Cerrado. Revista de Ecologia e Meio Ambiente, v. XX, n. XX, 2020.</p>
+      <p>BRASIL. Ministério da Agricultura. Inventário Nacional de Emissões de Gases de Efeito Estufa 2020. Brasília: Ministério da Agricultura, 2020.</p>
+      <p>IPCC. Climate Change 2023: Synthesis Report. Geneva: IPCC, 2023. Disponível em: https://www.ipcc.ch/report/ar6/syr/. Acesso em: 05 out. 2025.</p>
+      <p>NASA. Global Climate Change: Vital Signs of the Planet. Disponível em: https://climate.nasa.gov. Acesso em: 05 out. 2025.</p>
+      <p>NOAA. 2024: warmest year on record. Disponível em: https://www.noaa.gov. Acesso em: 05 out. 2025.</p>
+      <p>FAO. Tackling methane emissions from livestock. Roma: FAO, 2018.</p>
+    </div>
+  </section>
+
+  <!-- Apêndice -->
+  <section id="apendice" class="card">
+    <h2>Apêndice</h2>
+    <h3>Questionário aplicado (modelo)</h3>
+    <div class="small">
+      <p>Qual seu nome? ________________________</p>
+      <p>1) Você entendeu o objetivo do jogo? Explique: ________________________</p>
+      <p>2) Você se conscientizou melhor sobre construir um futuro sustentável? ( ) Sim ( ) Não</p>
+      <p>3) Você gostou do jogo? ( ) Sim ( ) Não</p>
+      <p>4) Você acha que o jogo pode ajudar outras pessoas a entenderem sobre poluição e preservação ambiental? Justifique: ________________________</p>
+      <p>5) Feedback livre: ________________________</p>
+    </div>
+
+    <h3>Tabela: Resultados resumidos</h3>
+    <table>
+      <thead><tr><th>Pergunta</th><th>Positivas</th><th>Negativas</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>32</td><td>0</td></tr>
+        <tr><td>2</td><td>30</td><td>2</td></tr>
+        <tr><td>3</td><td>32</td><td>0</td></tr>
+        <tr><td>4</td><td>32</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div style="font-weight:700">Combate à Crise Climática — Projeto Acadêmico — Colégio Alfa Cem Bilíngue</div>
+  <div style="font-size:0.9rem;margin-top:6px">© 2025</div>
+</footer>
+
+<!-- TOOLBAR ADM -->
+<div class="toolbar" id="toolbar" aria-hidden="true">
+  <h4>Painel ADM</h4>
+  <div id="img-list"></div>
+  <div style="margin-top:10px" class="flex">
+    <button id="saveLocal">💾 Salvar no navegador</button>
+    <button id="exportBtn">📥 Exportar HTML</button>
+    <button id="pdfBtn" class="btn-muted">🖨️ Gerar PDF</button>
+    <button id="resetBtn" class="btn-muted">♻️ Restaurar originais</button>
+  </div>
+  <p class="small" style="margin-top:8px">Ative o modo ADM (ou Ctrl+E) para editar textos; clique em uma imagem para substituir; use "Salvar no navegador" para manter alterações; "Exportar HTML" baixa um arquivo final com tudo embutido.</p>
+</div>
+
+<button id="adm-toggle">🔧 Ativar modo ADM</button>
+
+<script>
+  // ----------------- Estado inicial -----------------
+  const editableEls = Array.from(document.querySelectorAll('[data-edit-id]'));
+  const initialContent = {};
+  editableEls.forEach(el=>{
+    const id = el.dataset.editId;
+    initialContent[id] = el.innerHTML;
+    el.setAttribute('contenteditable', false);
+  });
+
+  // imagens substituíveis
+  const imageEls = Array.from(document.querySelectorAll('img.replacable, img[data-img-id]'));
+  const initialImages = {};
+  imageEls.forEach(img=>{
+    const id = img.dataset.imgId || img.id || ('img-'+Math.random().toString(36).slice(2,8));
+    img.dataset.imgId = id;
+    initialImages[id] = img.src;
+  });
+
+  // build image controls in toolbar
+  const imgList = document.getElementById('img-list');
+  function buildImgControls(){
+    imgList.innerHTML = '';
+    imageEls.forEach(img=>{
+      const id = img.dataset.imgId;
+      const row = document.createElement('div');
+      row.style.display='flex'; row.style.alignItems='center'; row.style.gap='8px'; row.style.marginBottom='8px';
+      const label = document.createElement('div'); label.className='small'; label.style.flex='1'; label.textContent = id;
+      const btnReset = document.createElement('button'); btnReset.textContent='Reset img'; btnReset.className='btn-muted';
+      btnReset.addEventListener('click', ()=> resetImage(id));
+      const btn = document.createElement('button'); btn.textContent='Substituir';
+      btn.addEventListener('click', ()=> openFileDialogFor(id));
+      row.appendChild(label); row.appendChild(btnReset); row.appendChild(btn);
+      imgList.appendChild(row);
+    });
+  }
+  buildImgControls();
+
+  function openFileDialogFor(imgId){
+    const input = document.createElement('input'); input.type='file'; input.accept='image/*';
+    input.onchange = (ev)=>{
+      const f = ev.target.files[0];
+      if(!f) return;
+      const reader = new FileReader();
+      reader.onload = ()=> {
+        const dataUrl = reader.result;
+        const img = document.querySelector(`img[data-img-id="${imgId}"]`);
+        if(img){ img.src = dataUrl; img.setAttribute('data-local','true'); saveToLocalStorage(); }
+      };
+      reader.readAsDataURL(f);
+    };
+    input.click();
+  }
+
+  function resetImage(imgId){
+    const img = document.querySelector(`img[data-img-id="${imgId}"]`);
+    if(img){ img.src = initialImages[imgId]; img.removeAttribute('data-local'); saveToLocalStorage(); }
+  }
+
+  // ADM toggle
+  const admToggle = document.getElementById('adm-toggle');
+  const toolbar = document.getElementById('toolbar');
+  let adm = false;
+  admToggle.addEventListener('click', toggleAdm);
+  document.addEventListener('keydown', (e)=>{ if(e.ctrlKey && e.key.toLowerCase()==='e') toggleAdm(); });
+
+  function toggleAdm(){
+    adm = !adm;
+    admToggle.textContent = adm ? '✅ Modo ADM Ativo (Ctrl+E)' : '🔧 Ativar modo ADM';
+    document.querySelectorAll('[data-edit-id]').forEach(el=> el.setAttribute('contenteditable', adm));
+    toolbar.style.display = adm ? 'block' : 'none';
+    toolbar.setAttribute('aria-hidden', adm ? 'false' : 'true');
+    buildImgControls();
+  }
+
+  // Save to localStorage
+  function saveToLocalStorage(){
+    const texts = {};
+    document.querySelectorAll('[data-edit-id]').forEach(el=>{
+      texts[el.dataset.editId] = el.innerHTML;
+    });
+    const imgs = {};
+    document.querySelectorAll('img[data-img-id]').forEach(img=>{
+      imgs[img.dataset.imgId] = img.src;
+    });
+    const state = {texts, imgs, ts: Date.now()};
+    localStorage.setItem('tcc_clima_state_v1', JSON.stringify(state));
+    alert('Alterações salvas no navegador.');
+  }
+  document.getElementById('saveLocal').addEventListener('click', saveToLocalStorage);
+
+  // Restore
+  function restoreFromLocalStorage(){
+    try{
+      const raw = localStorage.getItem('tcc_clima_state_v1');
+      if(!raw) return false;
+      const obj = JSON.parse(raw);
+      if(obj.texts){
+        Object.keys(obj.texts).forEach(id=>{
+          const el = document.querySelector(`[data-edit-id="${id}"]`);
+          if(el) el.innerHTML = obj.texts[id];
+        });
+      }
+      if(obj.imgs){
+        Object.keys(obj.imgs).forEach(id=>{
+          const img = document.querySelector(`img[data-img-id="${id}"]`);
+          if(img && obj.imgs[id]) img.src = obj.imgs[id];
+        });
+      }
+      return true;
+    }catch(e){ console.warn(e); return false; }
+  }
+  restoreFromLocalStorage();
+
+  // Reset to original
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Restaurar conteúdo original?')) return;
+    Object.keys(initialContent).forEach(id=>{
+      const el = document.querySelector(`[data-edit-id="${id}"]`);
+      if(el) el.innerHTML = initialContent[id];
+    });
+    Object.keys(initialImages).forEach(id=>{
+      const img = document.querySelector(`img[data-img-id="${id}"]`);
+      if(img) { img.src = initialImages[id]; img.removeAttribute('data-local'); }
+    });
+    localStorage.removeItem('tcc_clima_state_v1');
+    rebuildCharts();
+    alert('Restaurado ao estado original.');
+  });
+
+  // Export HTML (clone)
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const cloneDoc = document.documentElement.cloneNode(true);
+    // hide toolbar and adm button
+    const tb = cloneDoc.querySelector('#toolbar'); if(tb) tb.style.display='none';
+    const admBtn = cloneDoc.querySelector('#adm-toggle'); if(admBtn) admBtn.style.display='none';
+    // remove contenteditable attributes
+    cloneDoc.querySelectorAll('[contenteditable]').forEach(n=> n.removeAttribute('contenteditable'));
+    const docStr = '<!doctype html>\\n' + cloneDoc.outerHTML;
+    const blob = new Blob([docStr], {type: 'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'TCC_Combate_Crise_Climaticas.html';
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  });
+
+  // PDF button (open print dialog)
+  document.getElementById('pdfBtn').addEventListener('click', ()=>{
+    // prepare simple print view: hide toolbar & other controls via inline style
+    const toolbarEl = document.getElementById('toolbar');
+    const admBtn = document.getElementById('adm-toggle');
+    toolbarEl.style.display = 'none';
+    admBtn.style.display = 'none';
+    window.print();
+    // restore
+    toolbarEl.style.display = adm ? 'block' : 'none';
+    admBtn.style.display = 'block';
+  });
+
+  // ----------------- Charts (Chart.js) -----------------
+  // Example datasets (can be replaced manually)
+  const surveyLabels = ['Entendeu objetivo','Conscientização','Gostou','Pode ajudar outros'];
+  const surveyPositive = [32,30,32,32];
+  const surveyNegative = [0,2,0,0];
+
+  const tempYears = [1980,1990,2000,2010,2020,2024];
+  const tempVals = [0.20,0.35,0.45,0.65,1.02,1.29]; // anomalies °C
+
+  const co2Years = [1980,1990,2000,2010,2020,2024];
+  const co2Vals = [338,354,369,389,412,416]; // ppm illustrative
+
+  const ctxSurvey = document.getElementById('chartSurvey').getContext('2d');
+  const surveyChart = new Chart(ctxSurvey, {
+    type: 'bar',
+    data: {
+      labels: surveyLabels,
+      datasets: [
+        { label: 'Positivas', data: surveyPositive, backgroundColor:'#0f9d58' },
+        { label: 'Negativas', data: surveyNegative, backgroundColor:'#f97316' }
+      ]
+    },
+    options: { responsive:true, plugins:{ legend:{ position:'top' } }, scales:{ y:{ beginAtZero:true, ticks:{precision:0} } } }
+  });
+
+  const ctxTemp = document.getElementById('chartTemp').getContext('2d');
+  const tempChart = new Chart(ctxTemp, {
+    type: 'line',
+    data: { labels: tempYears, datasets: [{ label:'Anomalia (°C)', data: tempVals, borderColor:'#0f9d58', backgroundColor:'rgba(15,157,88,0.12)', fill:true, tension:0.25 }] },
+    options: { responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ title:{display:true,text:'ΔT (°C)'} } } }
+  });
+
+  const ctxCO2 = document.getElementById('chartCO2').getContext('2d');
+  const co2Chart = new Chart(ctxCO2, {
+    type: 'bar',
+    data: { labels: co2Years, datasets: [{ label:'CO₂ (ppm)', data: co2Vals, backgroundColor:'#2563eb' }] },
+    options: { responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:false } } }
+  });
+
+  function rebuildCharts(){
+    surveyChart.data.datasets[0].data = surveyPositive;
+    surveyChart.data.datasets[1].data = surveyNegative;
+    surveyChart.update();
+    tempChart.data.labels = tempYears; tempChart.data.datasets[0].data = tempVals; tempChart.update();
+    co2Chart.data.labels = co2Years; co2Chart.data.datasets[0].data = co2Vals; co2Chart.update();
+  }
+
+  // Quick replace-on-click when ADM active
+  document.addEventListener('click', (e)=>{
+    if(!adm) return;
+    const t = e.target;
+    if(t.tagName === 'IMG' && t.dataset.imgId){
+      if(confirm('Substituir esta imagem por um arquivo local?')) openFileDialogFor(t.dataset.imgId);
+    }
+  });
+
+  // Build toolbar initially (hidden)
+  buildImgControls();
+
+</script>
+</body>
+</html>
+
